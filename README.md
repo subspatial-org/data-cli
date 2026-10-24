@@ -58,10 +58,10 @@ On macOS:
 unzip data-platform-client-*-darwin-*.unsigned.zip
 mkdir -p ~/.local/bin
 cp data-platform-client-*/data data-platform-client-*/datad ~/.local/bin/
-xattr -d com.apple.quarantine ~/.local/bin/data ~/.local/bin/datad 2>/dev/null || true
+xattr -c ~/.local/bin/data ~/.local/bin/datad
 ```
 
-The last line is needed because the build is unsigned: without it, macOS says the program "cannot be opened because the developer cannot be verified". If `~/.local/bin` isn't on your PATH, add `export PATH="$HOME/.local/bin:$PATH"` to your shell's startup file (`~/.zshrc` on macOS, `~/.bashrc` on most Linux systems), then open a new terminal.
+The last line is needed because the build is unsigned. A file downloaded with a browser carries macOS's quarantine flag, and without that line macOS refuses to run `data`: a "“data” Not Opened" window offers **Move to Trash** or **Done**, and the terminal prints `zsh: killed`. If you see that, click **Done** (not Move to Trash), run the `xattr -c` line, and try again. If `~/.local/bin` isn't on your PATH, add `export PATH="$HOME/.local/bin:$PATH"` to your shell's startup file (`~/.zshrc` on macOS, `~/.bashrc` on most Linux systems), then open a new terminal.
 
 Check it runs:
 
@@ -88,10 +88,12 @@ data browse subspatial/empiar-11830@main
 # Download a file or folder
 data download subspatial/empiar-11830@main/PATH ./local-folder
 
-# Create a private repository of your own and upload to it
+# Create a private repository of your own and add a file to it
 data repo create --visibility private YOUR-USERNAME/my-data
-data upload ./my-files YOUR-USERNAME/my-data@main/raw
+data commit -m "Add the first scan" ./scan-001.mrc YOUR-USERNAME/my-data@main/raw/scan-001.mrc
 ```
+
+`data commit` uploads the file and publishes it in one step. (`data upload` only stages a file; nothing appears in the repository until it is committed.)
 
 Run `data help` for every command.
 
@@ -102,6 +104,11 @@ Run `data help` for every command.
 ```sh
 mkdir -p ~/mnt/empiar
 data mount subspatial/empiar-11830@main ~/mnt/empiar
+```
+
+`data mount` keeps running while the folder is mounted. Open the folder from another terminal, and when you're done, unmount it from there too:
+
+```sh
 data mount unmount ~/mnt/empiar
 ```
 
