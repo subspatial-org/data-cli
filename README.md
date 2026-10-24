@@ -2,6 +2,8 @@
 
 `data` is the command-line client for [subspatial](https://app.subspatial.io). With it you can browse, download and upload data in subspatial repositories, and work with branches, commits and pull requests from a terminal.
 
+**You need a subspatial account to use it.** subspatial is in a closed alpha, and accounts are by invitation only; without one, `data` can do no more than list what the public website already shows.
+
 This repository holds only the release builds. Downloads are on the [Releases page](https://github.com/subspatial-org/data-cli/releases).
 
 > [!WARNING]
