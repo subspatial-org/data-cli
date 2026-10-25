@@ -19,6 +19,31 @@ This repository holds only the release builds. Downloads are on the [Releases pa
 
 ## Install
 
+**macOS or Linux, one line:**
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/subspatial-org/data-cli/main/install.sh | sh
+```
+
+The [script](install.sh) picks the build for your system, checks it against the release's `SHA256SUMS`, and installs `subspatial` into `/usr/local/bin`, which is already on your PATH. It may ask for your password once, for `sudo`. Then check it:
+
+```sh
+subspatial version
+```
+
+**Or with [Homebrew](https://brew.sh):**
+
+```sh
+brew install subspatial-org/tap/subspatial
+```
+
+Upgrade later with `brew upgrade subspatial`, or by running the install line again.
+
+Neither way triggers macOS's "cannot be verified" block, because a file downloaded with `curl` or Homebrew doesn't get the quarantine flag that a browser adds.
+
+<details>
+<summary>Manual install (download the files yourself)</summary>
+
 Pick the file for your system from the newest release on the [Releases page](https://github.com/subspatial-org/data-cli/releases):
 
 | System | File |
@@ -28,25 +53,11 @@ Pick the file for your system from the newest release on the [Releases page](htt
 | macOS, Apple silicon (M1 and later) | `subspatial-cli-VERSION-darwin-arm64.unsigned.zip` |
 | macOS, Intel | `subspatial-cli-VERSION-darwin-amd64.unsigned.zip` |
 
-### 1. Download and check the file
-
-Download your file and `SHA256SUMS` into the same folder, open a terminal in that folder, and check the file. On Linux:
-
-```sh
-sha256sum --check --ignore-missing SHA256SUMS
-```
-
-On macOS:
+Download your file and `SHA256SUMS` into the same folder, open a terminal there, and check the file (`sha256sum` on Linux, `shasum -a 256` on macOS). It must show `OK`; if not, don't run it, and tell us.
 
 ```sh
 shasum -a 256 --check --ignore-missing SHA256SUMS
 ```
-
-Your file must show `OK`. If it shows anything else, don't run it; tell us instead.
-
-### 2. Install it
-
-This puts `subspatial` in `/usr/local/bin`, which is on your PATH already, so the command works straight away in the same terminal. It asks for your password once, for `sudo`.
 
 On Linux:
 
@@ -64,29 +75,9 @@ sudo install -m 0755 subspatial-cli-*/subspatial subspatial-cli-*/subspatiald /u
 sudo xattr -c /usr/local/bin/subspatial /usr/local/bin/subspatiald
 ```
 
-The `xattr -c` line is needed because the build is unsigned. A file downloaded with a browser carries macOS's quarantine flag, and without that line macOS refuses to run `subspatial`: a "“subspatial” Not Opened" window offers **Move to Trash** or **Done**, and the terminal prints `zsh: killed`. If you see that, click **Done** (not Move to Trash), run the `xattr -c` line, and try again.
+The `xattr -c` line is needed because the build is unsigned and a browser download carries macOS's quarantine flag. Without it macOS refuses to run `subspatial`: a "“subspatial” Not Opened" window offers **Move to Trash** or **Done**, and the terminal prints `zsh: killed`. If you see that, click **Done** (not Move to Trash), run the `xattr -c` line, and try again.
 
-### 3. Check it runs
-
-```sh
-subspatial version
-```
-
-It prints the version, for example `subspatial 0.3.0-alpha.2 (darwin/arm64; native_mount=true)`.
-
-<details>
-<summary>Installing without <code>sudo</code></summary>
-
-Put the two files in `~/.local/bin` instead, and add that folder to your PATH:
-
-```sh
-mkdir -p ~/.local/bin
-cp subspatial-cli-*/subspatial subspatial-cli-*/subspatiald ~/.local/bin/
-xattr -c ~/.local/bin/subspatial ~/.local/bin/subspatiald   # macOS only
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc     # macOS; on Linux use ~/.bashrc
-```
-
-Then open a new terminal before running `subspatial version`.
+To install without `sudo`, put the files in `~/.local/bin` instead (`mkdir -p ~/.local/bin && cp subspatial-cli-*/subspatial subspatial-cli-*/subspatiald ~/.local/bin/`), add `export PATH="$HOME/.local/bin:$PATH"` to `~/.zshrc` (macOS) or `~/.bashrc` (Linux), and open a new terminal. The install script does the same with `SUBSPATIAL_INSTALL_DIR=$HOME/.local/bin`.
 
 </details>
 
