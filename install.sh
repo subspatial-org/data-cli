@@ -110,6 +110,6 @@ fi
 
 say "Installed $("$install_dir/subspatial" version) into $install_dir."
 case ":$PATH:" in
-  *":$install_dir:"*) say "Next: subspatial login --api https://app.subspatial.io" ;;
+  *":$install_dir:"*) say "Next: subspatial login --api https://app.subspatial.io (or the site you were invited to)" ;;
   *) say "$install_dir isn't on your PATH. Add it, for example: echo 'export PATH=\"$install_dir:\$PATH\"' >> ~/.zshrc (or ~/.bashrc), then open a new terminal." ;;
 esac

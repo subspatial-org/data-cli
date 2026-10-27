@@ -89,6 +89,10 @@ subspatial login --api https://app.subspatial.io
 
 `subspatial` prints an address and a code. Open the address in a browser where you are signed in to subspatial, check the code matches, and approve it straight away, because the code expires after a few minutes. The terminal then says `Logged in to https://app.subspatial.io as <your username>.`
 
+Log in to the site you were invited to. Alpha testers use `https://app.subspatial.io`, as above. If you were invited to the development site instead, use `subspatial login --api https://dev.subspatial.io`.
+
+If the browser ends on a page saying subspatial is in a closed alpha, that site doesn't have an invitation for the account you signed in with. Press Ctrl+C in the terminal (it otherwise waits until the code expires), check which site and which sign-in (email or ORCID) your invitation was for, and try again, or ask your alpha contact.
+
 ## Use it
 
 Every repository page on subspatial has a **Code** menu with ready-made commands for that repository; copy them from there. Some examples:
