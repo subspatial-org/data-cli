@@ -128,6 +128,10 @@ subspatial mount subspatial/empiar-11830@main ~/mnt/empiar
 subspatial mount unmount ~/mnt/empiar
 ```
 
+## Documentation
+
+Guides for everyday use are in the [docs folder](docs/README.md): [getting started](docs/getting-started.md), [repositories](docs/repositories.md), [files](docs/files.md), [collaboration](docs/collaboration.md), [mounting](docs/mount.md), [authentication](docs/authentication.md), and the [command reference](docs/command-reference.md).
+
 ## Upgrading from 0.3.0-alpha.1
 
 Version 0.3.0-alpha.1 installed the command as `data`. Install the new release as above, then remove the old files: `rm ~/.local/bin/data ~/.local/bin/datad`. Your settings carry over; if `subspatial` says your login has expired, run `subspatial login` again.
