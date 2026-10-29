@@ -35,14 +35,14 @@ It prints `Created YOUR-USERNAME/my-data (private).` The argument is `OWNER/REPO
 A fork is your own copy of someone else's repository. You can change it freely and then propose your changes back with a [pull request](collaboration.md).
 
 ```sh
-subspatial fork --owner OWNER [--name NAME] [--visibility public|private] OWNER/REPO
+subspatial fork --owner OWNER [--name NAME] [--visibility public|private] OWNER/REPO[@REF]
 ```
 
 ```sh
 subspatial fork --owner YOUR-USERNAME subspatial/empiar-11830
 ```
 
-`--owner` is required: it is who will own the fork. `--name` is the new repository's name, and defaults to the original name. `--visibility` defaults to `public`. It prints `Forked to YOUR-USERNAME/empiar-11830 at main.`, where the last word is the fork's default branch.
+`--owner` is required: it is who will own the fork. `--name` is the new repository's name, and defaults to the original name. `--visibility` defaults to `public`. It prints `Forked to YOUR-USERNAME/empiar-11830 at main.`, where the last word is the fork's default branch. The fork starts from the original's default branch; add `@REF` to start it from another branch or commit, for example `subspatial/empiar-11830@some-branch`. Only public forks are free: a private fork needs a paid plan.
 
 ## Archive, delete and restore
 
