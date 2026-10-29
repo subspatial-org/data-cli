@@ -18,7 +18,7 @@ Open the address in a browser where you are signed in to subspatial, check that 
 
 ### Which site
 
-Log in to the site you were invited to. Alpha testers use `https://app.subspatial.io`. If you were invited to the development site, use `--api https://dev.subspatial.io`. `--api` is remembered, so you only need it the first time (or when you switch sites). Without it, and with no earlier login, `subspatial` uses `http://127.0.0.1:8080`, which is only right for a developer running subspatial on their own computer.
+Log in to the site you were invited to. Alpha testers use `https://app.subspatial.io`. If you were invited to the development site, use `--api https://dev.subspatial.io`. `--api` is remembered, so you only need it the first time (or when you switch sites). Without it, and with no earlier login, `subspatial` uses `https://app.subspatial.io`.
 
 If the browser ends on a page saying subspatial is in a closed alpha, that site has no invitation for the account you signed in with. See the [main README](../README.md#sign-in).
 

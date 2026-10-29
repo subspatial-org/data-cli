@@ -24,7 +24,7 @@ Signs in. With no flags it starts the device code flow. See [Authentication](aut
 
 | Flag | Default | Meaning |
 |---|---|---|
-| `--api URL` | the saved site, else `http://127.0.0.1:8080` | Site to sign in to. It is saved. |
+| `--api URL` | the saved site, else `https://app.subspatial.io` | Site to sign in to. It is saved. |
 | `--token TOKEN` | none | Use an existing personal token. |
 | `--username NAME` | none | Sign in as a local development user. Not with `--token`. |
 
