@@ -2,7 +2,7 @@
 
 `subspatial mount` shows a repository as a folder on your computer. Files are downloaded only when you open them. It is **Linux only and experimental** in this pilot. If something goes wrong, use [`subspatial download`](files.md#download) instead, and tell us what happened.
 
-You need FUSE 3 (the `fuse3` package on Debian, Ubuntu and Fedora). To check whether your copy of `subspatial` includes mounting, run `subspatial version`; it ends with `native_mount=true` or `native_mount=false`. <!-- TODO(review): README says macOS mounting is not supported in this pilot, but usageText mentions macFUSE. Documented as Linux only to match the README. -->
+You need FUSE 3 (the `fuse3` package on Debian, Ubuntu and Fedora). To check whether your copy of `subspatial` includes mounting, run `subspatial version`; it ends with `native_mount=true` or `native_mount=false`.
 
 ## Mount
 
