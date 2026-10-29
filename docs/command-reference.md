@@ -38,7 +38,7 @@ subspatial login --api https://app.subspatial.io
 subspatial token (set [--stdin] [TOKEN] | status | remove)
 ```
 
-`set` stores a token, `status` checks the stored one, `remove` deletes it. `--stdin` (default off) reads the token from standard input.
+`set` stores a token, `status` checks the stored one and shows which site it is for, `remove` deletes it. `--stdin` (default off) reads the token from standard input.
 
 ```sh
 subspatial token status

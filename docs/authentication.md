@@ -35,7 +35,7 @@ subspatial token set [--stdin] [TOKEN]
 subspatial token remove
 ```
 
-- `status` prints `Token configured for YOUR-USERNAME (token value hidden).`, or `No token configured.` If the token is stored but the server rejects it, it prints `token is configured but invalid:` and the reason.
+- `status` prints `Token configured for YOUR-USERNAME on SITE (token value hidden).`, or `No token configured for SITE.` If the token is stored but the server rejects it, it prints `token for SITE is configured but invalid:` and the reason. Use it to check which site you are signed in to.
 - `set` stores a token you give it. It prints `Token stored with owner-only file permissions.` Prefer `--stdin`, which reads the token from the first line of standard input, so it does not end up in your shell history or in the process list: `printf '%s\n' "$TOKEN" | subspatial token set --stdin`. You cannot give both `--stdin` and a `TOKEN` argument.
 - `remove` deletes the stored credentials and prints `Stored token removed.` It is also how you sign out.
 

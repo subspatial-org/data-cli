@@ -6,7 +6,7 @@ This page assumes you have [installed `subspatial` and signed in](../README.md).
 subspatial token status
 ```
 
-It prints `Token configured for <your username> (token value hidden).` If it says `No token configured.`, see [Authentication](authentication.md).
+It prints `Token configured for <your username> on <site> (token value hidden).` Check that the site is the one you were invited to. If it says `No token configured for <site>.`, see [Authentication](authentication.md).
 
 ## References
 
