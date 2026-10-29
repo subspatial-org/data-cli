@@ -203,7 +203,7 @@ subspatial commit -m "Add the first scan" ./scan-001.mrc YOUR-USERNAME/my-data@m
 ## fork
 
 ```sh
-subspatial fork --owner OWNER [--name NAME] OWNER/REPO
+subspatial fork --owner OWNER [--name NAME] [--visibility public|private] OWNER/REPO[@REF]
 ```
 
 | Flag | Default | Meaning |
