@@ -140,16 +140,22 @@ subspatial browse subspatial/empiar-11830@main
 ## upload
 
 ```sh
-subspatial upload [--expected-head COMMIT] LOCAL OWNER/REPO@BRANCH/PATH
+subspatial upload [--expected-head COMMIT] [--content-type TYPE] [--concurrency N] [--idle-timeout D] [--retry-deadline D] [--idempotency-key KEY] LOCAL OWNER/REPO@BRANCH/PATH
 ```
 
 | Flag | Default | Meaning |
 |---|---|---|
 | `--expected-head COMMIT` | the branch's current head | Head the branch must still be at. |
 | `--content-type TYPE` | `application/octet-stream` | Content type of the file. |
+| `--concurrency N` | 4 | Multipart parts in flight (1 to 32). |
+| `--idle-timeout D` | 5m | Abort and retry a transfer when no bytes move for this long. |
+| `--retry-deadline D` | 3m | Give up on a part that has kept failing for this long. |
+| `--idempotency-key KEY` | none | Reuse a prior upload session after an interruption. |
 | `--json` | off | JSON output. |
 
 Stages a file; it is not published until committed. See [Files](files.md#upload).
+
+Files of 64 MiB and more upload in parts, each checked by S3, and the server verifies the whole file before it appears in the repository. The per-file limit for these uploads is 100 GiB. There is no limit on total time: a transfer is abandoned only after `--idle-timeout` with no bytes moving, and a failed part is retried with backoff for up to `--retry-deadline`. If an upload is interrupted, run the same command again with the same `--idempotency-key` and only the missing parts are sent.
 
 ```sh
 subspatial upload ./scan-001.mrc YOUR-USERNAME/my-data@main/raw/scan-001.mrc
@@ -346,7 +352,7 @@ subspatial prefetch --include "raw/*.mrc" subspatial/empiar-11830@main ./empiar-
 ## mount
 
 ```sh
-subspatial mount [--write] OWNER/REPO@REF[/PREFIX] DIRECTORY
+subspatial mount [--write] [--concurrency N] OWNER/REPO@REF[/PREFIX] DIRECTORY
 ```
 
 Linux only, experimental. See [Mounting](mount.md).
@@ -354,6 +360,7 @@ Linux only, experimental. See [Mounting](mount.md).
 | Flag | Default | Meaning |
 |---|---|---|
 | `--write` | off | Private writable overlay. |
+| `--concurrency N` | 4 | Multipart parts in flight (1 to 32). Only used with `--write`. |
 | `--include GLOB` | all files | Only paths matching the glob. Repeatable. |
 | `--device ID` | empty | Device identifier. |
 | `--cache DIR` | the `cache` folder in the config folder | Verified content cache. |
@@ -464,6 +471,16 @@ Flags: `-m`, `--message` (required), `--json` (off).
 ```sh
 subspatial mount-session commit -m "Fix the labels" ./my-data-local
 ```
+
+## step test
+
+```sh
+subspatial step test <package-dir> [--case NAME] [--engine docker|podman] [--image IMAGE] [--keep] [--json] [--gpu]
+```
+
+Runs a step package's contract cases locally, in isolated containers (Docker or Podman), with no network and no platform account needed. `--image` tests an image you already built instead of building one.
+
+Run `subspatial step --help` for the details. It still calls the command `data step test`; that is a known alpha.4 limit, and the command is `subspatial step test`.
 
 ## refresh
 
