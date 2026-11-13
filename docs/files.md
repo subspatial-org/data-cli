@@ -31,10 +31,12 @@ Downloads one file. `LOCAL` is where to put it. The reference must include a pat
 ## Upload
 
 ```sh
-subspatial upload [--expected-head COMMIT] [--content-type TYPE] LOCAL OWNER/REPO@BRANCH/PATH
+subspatial upload [--expected-head COMMIT] [--content-type TYPE] [--concurrency N] [--idle-timeout D] [--retry-deadline D] [--idempotency-key KEY] LOCAL OWNER/REPO@BRANCH/PATH
 ```
 
 Uploads a file to a staging area. It does not change the repository. It prints `Uploaded PATH (N bytes); staged handle HANDLE. Commit explicitly to publish.` `--content-type` defaults to `application/octet-stream`. If you don't give `--expected-head`, `subspatial` looks up the branch's current head first. To add a file to a repository, use `commit`.
+
+**Large files and resuming.** Files of 64 MiB and more upload in parts, each checked by S3, and the server verifies the whole file before it appears in the repository. The limit for these uploads is 100 GiB. A transfer is abandoned only after `--idle-timeout` (default 5 minutes) with no bytes moving, and a failed part is retried with backoff for up to `--retry-deadline` (default 3 minutes). `--concurrency N` sets how many parts are in flight (default 4, from 1 to 32). If an upload is interrupted, run the same command again with the same `--idempotency-key` and only the missing parts are sent. Resuming applies only to these multipart uploads: a smaller file goes in a single request, so an interrupted one is simply uploaded again. See the [command reference](command-reference.md#upload) for every flag.
 
 ## Commit
 

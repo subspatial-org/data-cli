@@ -1,0 +1,33 @@
+# This repository holds the CLI's documentation and installer. The CLI is built
+# in subspatial-org/subspatial-backend, so nothing here is generated.
+
+# A binary downloaded or built into the checkout while trying the installer.
+/subspatial
+/data
+/dist/
+*.tar.gz
+
+# Environment, logs, OS and editor files
+.env
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Local work that never belongs in the repository
+# Worktrees made inside the checkout (`git worktree add`, Claude Code, other agents).
+# Make them next to the checkout instead, and remove them once their PR merges.
+/.worktrees/
+/.claude/worktrees/
+/wt-*/
+# Per-machine agent settings.
+.claude/settings.local.json
+# One-off scratch files and merge or editor leftovers. A script that is run more
+# than once belongs in scripts/, committed.
+/scratch/
+/tmp/
+*.bak
+*.orig
+*.rej
+*~
